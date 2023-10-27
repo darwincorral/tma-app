@@ -1,0 +1,30 @@
+
+.file-input {
+    border: 1px dashed #ccc;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    cursor: pointer;
+    min-width: 100%;
+  }
+  
+  .camera-icon {
+    font-size: 40px;
+    color: #ccc;
+    margin-bottom: 8px;
+  }
+  
+  .select-attachment {
+    font-size: 14px;
+    color: #666;
+  }
+
+  .image-preview {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    padding: 20px;
+    border-radius: 40px;
+  }

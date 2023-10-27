@@ -1,0 +1,38 @@
+<ion-list lines="none" class="ion-margin-top">
+  <ion-list-header class="ion-padding">
+    <ion-label>
+      Registrar Mina
+    </ion-label>
+  </ion-list-header>
+</ion-list>
+  <form #f="ngForm" (ngSubmit)="agregarMina(f.value)">
+    <ion-list>
+      <ion-item-group class="ion-padding-horizontal ion-margin">
+        <ion-input label="Nombre" labelPlacement="floating" fill="outline" mode="md" type="text"
+          [(ngModel)]="nombre" name="nombre" required></ion-input>
+      </ion-item-group>
+      <ion-item-group class="ion-padding-horizontal ion-margin">
+        <ion-input label="Capacidad de Producción" labelPlacement="floating" fill="outline" mode="md" type="number"
+          [(ngModel)]="capacidadProduccion" name="capacidadProduccion" required></ion-input>
+      </ion-item-group>
+      <ion-item-group class="ion-padding-horizontal ion-margin">
+        <ion-input label="Ubicación de la Mina" labelPlacement="floating" (ionInput)="buscarUbicacion($event)" fill="outline" mode="md" type="text"
+          [(ngModel)]="ubicacion" name="ubicacion" required></ion-input>
+      </ion-item-group>
+    </ion-list>
+
+    <div class="autocomplete-container" style="padding-left: 30px; padding-right: 30px; margin-top: -6%;">
+      <ion-list id="autocomplete-list">
+        <ion-item *ngFor="let place of autocompleteResults" (click)="seleccionarUbicacion(place)">
+          {{ place.description }}
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- Agrega un div para mostrar el mapa -->
+    <div [ngClass]="ubicacionSelected !=''?'map-container':'map-container-hidden'" >
+      <div id="map" ></div>
+    </div>
+
+    <ion-button expand="full" shape="round" type="submit" [disabled]="!f.valid">Agregar Mina</ion-button>
+  </form>

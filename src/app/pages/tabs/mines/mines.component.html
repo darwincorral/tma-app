@@ -1,0 +1,49 @@
+<ion-header  [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="light">
+      <ion-buttons slot="start">
+          <img style="width: 50px;"  src="assets/imgs/logo.png">
+      </ion-buttons>
+      <ion-title class="ion-text-center" color="dark">
+          <strong>TMA TRANSPORTES</strong>
+      </ion-title>
+      <ion-buttons slot="end">
+          <!-- <ion-label *ngIf="dispositivo=='web'">{{usuario}}</ion-label>-->
+          <ion-button>
+              <ion-icon color="dark" slot="icon-only" name="ellipsis-vertical"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+  
+<ion-content>
+  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchMinas()" placeholder="Buscar Mina"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let mina of filteredMinas">
+      <ion-label>
+        <h2>{{ mina.nombre }}</h2>
+        <p>Ubicación: {{ mina.ubicacion }}</p>
+        <p>Capacidad de Producción: {{ mina.capacidadProduccion }}</p>
+        <p><ion-button fill="outline" (click)="verDetallesMina(mina.id)" id="material">Ver Materiales</ion-button></p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab  vertical="bottom" horizontal="end">
+    <ion-fab-button id="register-mine">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ion-modal
+  #register_mine_modal
+  trigger="register-mine"
+  cssClass="inline_modal"
+  (ionModalDidDismiss)="reset($event)"
+  [breakpoints]="[0.1, 0.5, 0.9]"
+  [initialBreakpoint]="0.90">
+  <ng-template>
+    <app-register-mine></app-register-mine>
+  </ng-template>
+</ion-modal>

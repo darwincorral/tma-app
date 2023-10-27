@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar  color="primary">
+    <ion-title>
+      Materiales
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-segment [(ngModel)]="segment">
+    <ion-segment-button value="lista"><ion-icon name="newspaper-outline"></ion-icon></ion-segment-button>
+    <ion-segment-button value="registro"><ion-icon name="folder-open-outline"></ion-icon></ion-segment-button>
+  </ion-segment>
+
+  <!-- Segmento de Lista de Materiales -->
+  <ion-list *ngIf="segment === 'lista'">
+    <ion-searchbar (ionInput)="buscarMaterial($event)" placeholder="Buscar Material"></ion-searchbar>
+    <ion-item *ngFor="let material of materiales">
+      <ion-label>{{ material.nombre }}</ion-label>
+      <ion-note slot="end">{{ material.precio }} {{ material.unidadMedida }}</ion-note>
+    </ion-item>
+  </ion-list>
+
+  <!-- Segmento de Registro de Materiales -->
+  <ion-list *ngIf="segment === 'registro'">
+    <form #f="ngForm" (ngSubmit)="registrarMaterial(f.value)">
+      <ion-item-group class="ion-padding-horizontal ion-margin">
+        <ion-input label="Nombre del Material" labelPlacement="floating" fill="outline" mode="md" type="text"
+          [(ngModel)]="nombreMaterial" name="nombreMaterial" required></ion-input>
+      </ion-item-group>
+      <ion-item-group class="ion-padding-horizontal ion-margin">
+        <ion-input label="Cantidad Inicial" labelPlacement="floating" fill="outline" mode="md" type="number"
+          [(ngModel)]="cantidad" name="cantidad" required></ion-input>
+      </ion-item-group>
+      <ion-item-group class="ion-padding-horizontal ion-margin">
+        <ion-select [(ngModel)]="unidadMedida" name="unidadMedida" fill="outline" label="Unidad de Medida"
+          labelPlacement="floating" mode="md">
+          <ion-select-option value="Metro Cúbico">Metro Cúbico</ion-select-option>
+          <ion-select-option value="Toneladas">Toneladas</ion-select-option>
+          <ion-select-option value="Kilogramos">Kilogramos</ion-select-option>
+          <ion-select-option value="Litros">Litros</ion-select-option>
+          <ion-select-option value="Piezas">Piezas</ion-select-option>
+        </ion-select>
+      </ion-item-group>
+
+      <ion-item style="padding-top: 10px;">
+        <div class="file-input" (click)="file.click()" *ngIf="!filePreview">
+          <ion-icon name="camera" class="camera-icon"></ion-icon>
+          <div class="select-attachment">Seleccionar Imagen</div>
+        </div>
+        <ion-label position="stacked" *ngIf="filePreview">Seleccionar Imagen</ion-label>
+        <input type="file" #file [hidden]="!filePreview"  accept=".jpg, .jpeg, .png"  (change)="handleFileInput($event.target)">
+      </ion-item>
+
+      <div class="ion-text-center">
+        <img  *ngIf="filePreview" [src]="filePreview"  alt="Vista previa de la imagen" class="image-preview">  
+      </div>
+         
+      
+      <ion-button expand="full" shape="round" type="submit" [disabled]="!f.valid">Registrar Material</ion-button>
+    </form>
+  </ion-list>
+</ion-content>
