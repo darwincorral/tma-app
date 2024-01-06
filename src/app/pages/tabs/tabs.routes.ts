@@ -10,6 +10,7 @@ export const routes: Routes = [
       {
         path: 'home',
         loadComponent: () => import('./despachador/despachador.component').then( m => m.DespachadorComponent)
+        //loadComponent: () => import('./home/home.page').then( m => m.HomePage)
       },
       {
         path: 'users',
@@ -38,5 +39,6 @@ export const routes: Routes = [
     path: '',
     redirectTo: '/tabs/home',
     pathMatch: 'full',
-  }
+  },
+
 ];

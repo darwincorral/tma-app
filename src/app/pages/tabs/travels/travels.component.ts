@@ -4,12 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { EmptyScreenComponent } from 'src/app/components/empty-screen/empty-screen.component';
 import { DetailTravelComponent } from './detail-travel/detail-travel.component';
+import { RegisterTravelComponent } from './register-travel/register-travel.component';
 @Component({
   selector: 'app-travels',
   templateUrl: './travels.component.html',
   styleUrls: ['./travels.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, EmptyScreenComponent, DetailTravelComponent]
+  imports: [IonicModule, CommonModule, FormsModule, EmptyScreenComponent, DetailTravelComponent, RegisterTravelComponent]
 })
 export class TravelsComponent  implements OnInit {
   entregas: any[] = [
@@ -52,6 +53,10 @@ export class TravelsComponent  implements OnInit {
     if (role === 'confirm') {
       //this.message = `Hello, ${data}!`;
     }
+  }
+
+  reset(event) {
+
   }
 
 
